@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "description": "A fixture picture maker",
   "main": "index.js",
-  "author": { 
+  "author": {
     "username": "@dajabe"
   },
   "license": "ICS",
@@ -24,6 +24,7 @@
     "extends": "eda"
   },
   "dependencies": {
+    "puppeteer": "^14.1.2"
   },
   "devDependencies": {
     "eslint": "^8.10.0",
