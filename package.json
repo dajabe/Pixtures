@@ -1,0 +1,43 @@
+{
+  "name": "Pixtures",
+  "version": "0.0.0",
+  "description": "A fixture picture maker",
+  "main": "index.js",
+  "author": { 
+    "username": "@dajabe"
+  },
+  "license": "ICS",
+  "scripts": {
+    "start": "node index",
+    "lint": "eslint .",
+    "test": "jest --watchAll"
+  },
+  "homepage": "https://github.com/dajabe/Pixtures#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dajabe/Pixtures.git"
+  },
+  "bugs": {
+    "url": "https://github.com/dajabe/Pixtures.git/issues"
+  },
+  "eslintConfig": {
+    "extends": "eda"
+  },
+  "dependencies": {
+  },
+  "devDependencies": {
+    "eslint": "^8.10.0",
+    "eslint-config-eda": "^1.2.0",
+    "eslint-plugin-import": "^2.25.4",
+    "eslint-plugin-jest": "^26.1.1",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-prettier": "^4.0.0",
+    "eslint-plugin-promise": "^6.0.0",
+    "eslint-plugin-react": "^7.29.4",
+    "prettier": "2.6.1"
+  },
+  "prettier": {
+    "semi": false,
+    "singleQuote": true
+  }
+}
