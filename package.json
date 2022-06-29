@@ -8,9 +8,17 @@
   },
   "license": "ICS",
   "scripts": {
-    "start": "node index",
-    "lint": "eslint .",
-    "test": "jest --watchAll"
+    "dev": "run-p dev:server dev:client",
+    "dev:server": "nodemon --watch server server/index.js",
+    "dev:client": "npm run build -- --watch",
+    "knex": "knex --knexfile server/db/knexfile.js",
+    "db-reset": "run-s db:*",
+    "db:delete": "rm server/db/dev.sqlite3",
+    "db:migrate": "npm run knex migrate:latest",
+    "db:seed": "npm run knex seed:run",
+    "build": "webpack --config client/webpack.config.js",
+    "test": "jest --verbose --watchAll",
+    "lint": "eslint --ext .js,.jsx ."
   },
   "homepage": "https://github.com/dajabe/Pixtures#readme",
   "repository": {
