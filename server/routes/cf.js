@@ -28,7 +28,9 @@ router.get('/mens', async (req, res) => {
         // Select based on CSS row which has an outerText property that contains game details
         document.querySelectorAll("[class^='fixture-row']")
       ).map((obj) => {
-        return obj.innerText
+        return Array.from(obj.children)
+          .filter((child) => child.innerText.length > 0)
+          .map((child) => child.innerText)
       })
     })
     await browser.close()
