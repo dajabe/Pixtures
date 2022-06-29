@@ -1,0 +1,98 @@
+{
+  "name": "Pixtures",
+  "version": "0.0.0",
+  "description": "A fixture picture maker",
+  "main": "index.js",
+  "author": {
+    "username": "@dajabe"
+  },
+  "license": "ICS",
+  "scripts": {
+    "dev": "run-p dev:server dev:client",
+    "dev:server": "nodemon --watch server server/index.js",
+    "dev:client": "npm run build -- --watch",
+    "knex": "knex --knexfile server/db/knexfile.js",
+    "db-reset": "run-s db:*",
+    "db:delete": "rm server/db/dev.sqlite3",
+    "db:migrate": "npm run knex migrate:latest",
+    "db:seed": "npm run knex seed:run",
+    "build": "webpack --config client/webpack.config.js",
+    "test": "jest --verbose --watchAll",
+    "lint": "eslint --ext .js,.jsx ."
+  },
+  "homepage": "https://github.com/dajabe/Pixtures#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dajabe/Pixtures.git"
+  },
+  "bugs": {
+    "url": "https://github.com/dajabe/Pixtures.git/issues"
+  },
+  "babel": {
+    "presets": [
+      "@babel/preset-typescript",
+      "@babel/preset-env",
+      "@babel/preset-react"
+    ]
+  },
+  "eslintConfig": {
+    "extends": "eda/react",
+    "ignorePatterns": [
+      "bundle.js"
+    ]
+  },
+  "dependencies": {
+    "@babel/eslint-parser": "^7.18.2",
+    "@reduxjs/toolkit": "^1.8.2",
+    "express": "^4.18.1",
+    "express-jwt": "^7.7.5",
+    "express-jwt-authz": "^2.4.1",
+    "handlebars": "^4.7.7",
+    "jwks-rsa": "^2.1.4",
+    "knex": "^2.1.0",
+    "puppeteer": "^14.1.2",
+    "react": "^18.2.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.15.6",
+    "@babel/plugin-proposal-class-properties": "^7.14.5",
+    "@babel/plugin-proposal-object-rest-spread": "^7.15.6",
+    "@babel/plugin-transform-regenerator": "^7.13.15",
+    "@babel/plugin-transform-runtime": "^7.15.0",
+    "@babel/preset-env": "^7.15.6",
+    "@babel/preset-react": "^7.14.5",
+    "@babel/preset-typescript": "^7.17.12",
+    "@testing-library/jest-dom": "^5.14.1",
+    "@testing-library/react": "^12.1.3",
+    "@testing-library/user-event": "^12.7.1",
+    "babel-loader": "^8.2.2",
+    "babel-plugin-styled-components": "^1.12.0",
+    "eslint": "^8.10.0",
+    "eslint-config-eda": "^1.2.0",
+    "eslint-plugin-import": "^2.25.4",
+    "eslint-plugin-jest": "^26.1.1",
+    "eslint-plugin-jsx-a11y": "^6.5.1",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-prettier": "^4.0.0",
+    "eslint-plugin-promise": "^6.0.0",
+    "eslint-plugin-react": "^7.29.4",
+    "jest": "^27.5.1",
+    "jsdom": "^16.4.0",
+    "nodemon": "^2.0.18",
+    "npm-run-all": "^4.1.5",
+    "prettier": "2.6.1",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "react-router-dom": "^6.2.2",
+    "regenerator-runtime": "^0.13.7",
+    "styled-components": "^5.3.1",
+    "superagent": "7.1.1",
+    "supertest": "^6.2.2",
+    "webpack": "^5.69.1",
+    "webpack-cli": "^4.9.2"
+  },
+  "prettier": {
+    "semi": false,
+    "singleQuote": true
+  }
+}
