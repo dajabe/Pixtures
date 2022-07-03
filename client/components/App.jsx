@@ -6,9 +6,11 @@ import Canvas from './Canvas'
 export default function App() {
   return (
     <div className="container">
-      <Header />
       <Sidebar />
-      <Canvas />
+      <div className="content">
+        <Header />
+        <Canvas />
+      </div>
     </div>
   )
 }

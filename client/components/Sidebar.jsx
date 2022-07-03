@@ -5,7 +5,7 @@ export default function Sidebar() {
     <nav>
       <ul>
         <li>
-          <a href="#">Non</a>
+          <a href="#">🗘</a>
         </li>
       </ul>
     </nav>
