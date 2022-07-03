@@ -2,10 +2,14 @@ const express = require('express')
 const router = express.Router()
 const puppeteer = require('puppeteer')
 
+const objectify = require('../../libs/objectify')
+
 module.exports = router
 
 const url =
   'https://www.centralfootball.co.nz/manawatu-fixtures/mens-senior-football-4'
+const keyArr = ['date', 'home', 'vs', 'away', 'ground']
+
 // POST /api/v1/cf
 router.get('/', async (req, res) => {
   try {
@@ -90,8 +94,8 @@ router.get('/mens-horizons', async (req, res) => {
           return [...new Set(fixture)]
         })
     })
-    await browser.close()
-    res.send(data)
+    browser.close()
+    res.json(objectify(data, keyArr))
   } catch (err) {
     res.status(500).send(err.message)
   }
