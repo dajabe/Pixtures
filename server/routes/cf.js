@@ -70,6 +70,8 @@ router.get('/menstd', async (req, res) => {
     )
     // Wait for the page to load properly first
     await page.goto(url, { waitUntil: 'networkidle2' })
+    await page.select('#widget_1043332 select.fe-comp-comps', '1790889155')
+    await page.waitFor(5000)
 
     // selector = #fe-draws-list-1043332 > table > tbody > tr:nth-child(2) > td.abbr-name-comp.home-team
     const data = await page.evaluate(() => {
@@ -83,9 +85,10 @@ router.get('/menstd', async (req, res) => {
       const fixtures = fixtureTable
         .filter((row) => Array.from(row.querySelectorAll('td')).length > 1)
         .map((row) => {
-          return Array.from(row.querySelectorAll('td'))
+          const fixture = Array.from(row.querySelectorAll('td'))
             .filter((col) => col.innerText.length > 0)
             .map((col) => col.innerText)
+          return [...new Set(fixture)]
         })
       return fixtures
     })
