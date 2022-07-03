@@ -42,7 +42,6 @@ router.get('/mens', async (req, res) => {
     // Wait for the page to load properly first
     await page.goto(url, { waitUntil: 'networkidle2' })
 
-    // selector = #fe-draws-list-1043332 > table > tbody > tr:nth-child(2) > td.abbr-name-comp.home-team
     const fixtures = await page.evaluate(() => {
       return Array.from(
         // Select based on CSS row which has an outerText property that contains game details
@@ -61,7 +60,8 @@ router.get('/mens', async (req, res) => {
 })
 
 // Alternative method using table tr and td as selectors
-router.get('/menstd', async (req, res) => {
+router.get('/mens-horizons', async (req, res) => {
+  // Refactor this to use helper functions
   try {
     const browser = await puppeteer.launch()
     const page = await browser.newPage()
@@ -70,27 +70,25 @@ router.get('/menstd', async (req, res) => {
     )
     // Wait for the page to load properly first
     await page.goto(url, { waitUntil: 'networkidle2' })
+    // Select competition, second param here specifies the competition
     await page.select('#widget_1043332 select.fe-comp-comps', '1790889155')
-    await page.waitFor(5000)
+    // Wait for selector to load content
+    await page.waitForNetworkIdle()
 
-    // selector = #fe-draws-list-1043332 > table > tbody > tr:nth-child(2) > td.abbr-name-comp.home-team
     const data = await page.evaluate(() => {
-      // Select based on CSS row which has an outerText property that contains game details
-      // Additional selector to try isolate rows in specific draw lists. Cup and League games but returns null for some reason.
-      //* Stop trying to pull both divs of table in at the same time. Use an endpoint for cup fixtures and an endpoint for season fixtures
-
-      const fixtureTable = Array.from(
+      // Grab all table row elements under the div for season fixtures
+      return Array.from(
         document.querySelectorAll('#fe-draws-list-1043332 table tr')
-      )
-      const fixtures = fixtureTable
+      ) // Filter out any empty results
         .filter((row) => Array.from(row.querySelectorAll('td')).length > 1)
         .map((row) => {
+          // For each column in the row filter out empties and then grab the innerText
           const fixture = Array.from(row.querySelectorAll('td'))
             .filter((col) => col.innerText.length > 0)
             .map((col) => col.innerText)
+          // Set here allows us to eliminate duplicate records for team names
           return [...new Set(fixture)]
         })
-      return fixtures
     })
     await browser.close()
     res.send(data)
@@ -98,15 +96,3 @@ router.get('/menstd', async (req, res) => {
     res.status(500).send(err.message)
   }
 })
-
-//Puppeteer expermenting
-// await res.status(200)
-// const [el] = await page.$x(
-//   //*[@id="widget_1043332"]/div[1]/div[3]/ul'
-// )
-// console.log(el)
-// const src = await el.getProperty('src')
-// const srcTxt = await src.jsonValue()
-// console.log(srcTxt)
-
-// const title = await page.title()
