@@ -2,10 +2,9 @@ const express = require('express')
 const router = express.Router()
 const puppeteer = require('puppeteer')
 
-const objectify = require('../../libs/objectify')
-
 module.exports = router
 
+const objectify = require('../../libs/objectify')
 const url =
   'https://www.centralfootball.co.nz/manawatu-fixtures/mens-senior-football-4'
 const keyArr = ['date', 'home', 'vs', 'away', 'ground']
@@ -51,9 +50,7 @@ router.get('/mens', async (req, res) => {
         // Select based on CSS row which has an outerText property that contains game details
         document.querySelectorAll("[class^='fixture-row']")
       ).map((obj) => {
-        return Array.from(obj.children)
-          .filter((child) => child.innerText.length > 0)
-          .map((child) => child.innerText)
+        return Array.from(obj.children).map((child) => child.innerText)
       })
     })
     await browser.close()
