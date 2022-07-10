@@ -3,10 +3,11 @@
  * @returns { Promise<void> }
  */
 exports.up = function (knex) {
-  knex.schema.createTable('users', (table) => {
+  return knex.schema.createTable('users', (table) => {
     table.string('auth_id').primary()
     table.string('name')
     table.string('email')
+    table.timestamps
   })
 }
 
@@ -15,5 +16,5 @@ exports.up = function (knex) {
  * @returns { Promise<void> }
  */
 exports.down = function (knex) {
-  knex.schema.dropTable('users')
+  return knex.schema.dropTable('users')
 }
