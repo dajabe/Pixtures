@@ -4,8 +4,8 @@
  */
 exports.up = function (knex) {
   return knex.schema.createTable('team_sponsors', (t) => {
-    t.integer('team_id')
-    t.integer('sponsor_id')
+    t.uuid('team_id')
+    t.uuid('sponsor_id')
   })
 }
 
