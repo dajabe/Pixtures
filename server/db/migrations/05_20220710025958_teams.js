@@ -4,7 +4,7 @@
  */
 exports.up = function (knex) {
   return knex.schema.createTable('teams', (t) => {
-    t.increments('id').primary
+    t.uuid('id').primary()
     t.string('name')
   })
 }

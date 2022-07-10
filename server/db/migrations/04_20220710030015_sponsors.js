@@ -4,7 +4,7 @@
  */
 exports.up = function (knex) {
   return knex.schema.createTable('sponsors', (t) => {
-    t.uuid('id').primary
+    t.uuid('id').primary()
     t.string('name')
     t.string('logo')
   })
